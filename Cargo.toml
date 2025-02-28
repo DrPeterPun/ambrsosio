@@ -1,0 +1,9 @@
+[package]
+name = "ambrsosio"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+serenity = "0.12"
+thirtyfour = "0.32"
+tokio = { version = "1", features = ["full"] }
