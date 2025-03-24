@@ -8,7 +8,7 @@ async fn get_page(url: &str) -> WebDriverResult<String> {
     let mut caps = DesiredCapabilities::chrome();
     caps.set_headless()?;
 
-    let driver = WebDriver::new("http://localhost:39795", caps).await?;
+    let driver = WebDriver::new("http://localhost:42631", caps).await?;
     
     driver.get(url).await?;
     println!("Page loaded");
@@ -23,9 +23,7 @@ async fn get_page(url: &str) -> WebDriverResult<String> {
     Ok(html)
 }
 
-
-
 pub async fn track_janestreet(_sender: mpsc::Sender<String>){
     let page = get_page(JS_URL);
-    print!("{:?}", page.await.unwrap());
+    print!("{:?}", page.await);
 }
