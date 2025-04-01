@@ -31,7 +31,8 @@ async fn send_discord_message(user_id: u64, http: &serenity::http::Http, message
     }
 }
 
-#[tokio::main] // This makes main async
+// This makes main async
+#[tokio::main] 
 async fn main() {
 
     // Read the bot token from the "token" file
