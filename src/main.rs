@@ -34,7 +34,7 @@ async fn send_discord_message(user_id: u64, http: &serenity::http::Http, message
 #[tokio::main]
 async fn main() {
     // Read the bot token from the "token" file
-    let token = match fs::read_to_string("token") {
+    let token = match fs::read_to_string("/token") {
         Ok(t) => t.trim().to_string(), // Trim to remove any trailing newline
         Err(e) => {
             eprintln!("Failed to read token file: {}", e);
