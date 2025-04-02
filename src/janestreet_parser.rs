@@ -95,7 +95,7 @@ pub async fn monitor_js(_sender: mpsc::Sender<String>, users: &[User; 2]) -> ! {
         let new_state = get_state_result.unwrap();
 
         // compare the titles
-        if state.title == new_state.title {
+        if state.title != new_state.title {
             // NEW PUZZLE
             println!("INFO: A new puzzle was posted");
             for user in users {
