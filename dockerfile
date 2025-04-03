@@ -1,6 +1,6 @@
 # Stage 1: Build Rust App
-FROM rust:1.75 as builder
-WORKDIR /usr/src/myapp
+FROM rust:1.85 as builder
+WORKDIR /usr/src/ambrsosio
 COPY . .
 RUN cargo build --release
 
@@ -11,17 +11,8 @@ FROM debian:bullseye-slim
 RUN apt-get update && apt-get install -y \
     wget \
     unzip \
-    libglib2.0-0 \
-    libnss3 \
-    libgconf-2-4 \
-    libxi6 \
-    libxrandr2 \
-    libatk1.0-0 \
-    libatk-bridge2.0-0 \
-    libcups2 \
-    libxkbcommon0 \
-    && rm -rf /var/lib/apt/lists/*
-
+    curl
+    
 # Install Chrome
 RUN wget -qO- https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb > chrome.deb \
     && apt install -y ./chrome.deb \
@@ -34,7 +25,7 @@ RUN wget -qO- https://chromedriver.storage.googleapis.com/$(curl -sS https://chr
     && rm chromedriver.zip
 
 # Copy the Rust app
-COPY --from=builder /usr/src/myapp/target/release/myapp /usr/local/bin/myapp
+COPY --from=builder /usr/src/ambrsosio/target/release/ambrsosio /usr/local/bin/ambrsosio/
 
 # Run Chromedriver in the background and start the app
-CMD chromedriver --port=54321 & myapp
+CMD chromedriver --port=54321 & ambrsosio 
